@@ -1,0 +1,75 @@
+@page {
+  size: A4 portrait;
+  margin: 18mm 16mm;
+}
+
+@media print {
+  /* 화면용 시뮬레이션 제거 */
+  body {
+    background: none;
+    padding: 0;
+    display: block;
+  }
+  .page {
+    box-shadow: none;
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* 색상 정확도 */
+  html, body, * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 링크는 본문색 + 밑줄 (PDF 클릭 가능) */
+  a,
+  a:link,
+  a:visited {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    border-bottom: none;
+  }
+  .contact-list a {
+    text-decoration: underline;
+  }
+
+  /* 페이지 break 제어 — 페이지를 꽉 채우는 자연 흐름 */
+  /* 제목/형광펜이 페이지 마지막 줄에 외롭게 남지만 않도록 */
+  h1, h2, h3, h4, h5 {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+  .topic-title {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  /* 작은 박스(메타박스, 테이블 행, 문제점/해결/결과 묶음)만 통째로 유지 — 자르면 어색 */
+  .project-meta,
+  .psr {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+  table.simple tr {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* 그 외(.project-block, .topic, .psr, ul, li …)에는 break-inside avoid 없음
+     → 문제점/해결/결과 안에서도 자유롭게 페이지를 가로질러 흐름 */
+
+  /* 한 줄 외톨이만 최소화 */
+  p, li {
+    orphans: 2;
+    widows: 2;
+  }
+
+  /* 푸터는 굳이 새 페이지 차지하지 않도록 */
+  .resume-footer {
+    break-before: avoid;
+  }
+}

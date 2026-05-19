@@ -1,0 +1,429 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+:root {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-padding-y: 18mm;
+  --page-padding-x: 16mm;
+
+  --color-text: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-subtle: #8a8a8a;
+  --color-hairline: #e5e5e5;
+  --color-rule: #d0d0d0;
+
+  --font-body:
+    "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+
+  --fs-body: 10pt;
+  --fs-small: 9pt;
+  --fs-xsmall: 8.5pt;
+  --lh-body: 1.55;
+  --lh-tight: 1.35;
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  font-feature-settings: "ss06", "ss10";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 화면에서 A4 시뮬레이션 */
+@media screen {
+  body {
+    background: #e5e5e5;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page {
+    width: var(--page-width);
+    min-height: var(--page-height);
+    padding: var(--page-padding-y) var(--page-padding-x);
+    background: #fff;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* 타이포 위계 */
+h1 {
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 12pt;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 28px;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+h3 {
+  font-size: 11.5pt;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+h4 {
+  font-size: 10pt;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+h5 {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-top: 6px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-rule);
+  transition: border-color 0.15s ease;
+}
+a:hover {
+  border-bottom-color: var(--color-text);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* 헤더 */
+.resume-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--color-text);
+}
+.resume-header h1 {
+  flex-shrink: 0;
+}
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  justify-content: flex-end;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+.contact-list li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.contact-list .label {
+  color: var(--color-subtle);
+  font-weight: 500;
+}
+.contact-list a {
+  border-bottom: none;
+  color: var(--color-text);
+}
+.contact-list a:hover {
+  border-bottom: 1px solid var(--color-text);
+}
+
+/* 자기소개 */
+.intro p {
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* 경력/학력 테이블 */
+table.simple {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+}
+table.simple th,
+table.simple td {
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--color-hairline);
+  vertical-align: middle;
+}
+table.simple th {
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--color-muted);
+  background: transparent;
+}
+table.simple tr:last-child td {
+  border-bottom: none;
+}
+table.simple .col-period {
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+table.simple .col-role {
+  color: var(--color-muted);
+}
+
+/* 회사·학교 로고 */
+.org-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  line-height: 1.3;
+}
+.org-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  padding: 1px;
+  flex-shrink: 0;
+}
+.org-logo--dark {
+  background: #000;
+  border-color: #000;
+  padding: 0;
+}
+.org-logo--empty {
+  visibility: hidden;
+}
+.org-name {
+  font-weight: 600;
+}
+
+/* 프로젝트 블록 */
+.project-block {
+  margin-top: 20px;
+}
+.project-block + .project-block {
+  margin-top: 34px;
+}
+.project-block h3 {
+  margin-top: 0;
+  font-size: 12.5pt;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0a0a0a;
+}
+.project-block h3 a[href] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s ease;
+}
+.project-block h3 a[href]:hover {
+  text-decoration-color: var(--color-text);
+}
+.project-block h3 a[href^="http"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-left: 0.35em;
+  vertical-align: 0.04em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17L17 7'/><path d='M9 7h8v8'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.project-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  row-gap: 7px;
+  margin: 10px 0 18px;
+  padding: 14px 18px;
+  background: #fafafa;
+  border-radius: 4px;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  border-radius: 8px;
+}
+.project-meta dt {
+  font-weight: 600;
+  color: var(--color-subtle);
+  white-space: nowrap;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 2px;
+}
+.project-meta dd {
+  margin: 0;
+  color: var(--color-text);
+}
+.tech-stack {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px 6px;
+}
+.tech-stack code {
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
+  padding: 1px 7px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
+  color: var(--color-muted);
+  background: #fff;
+  line-height: 1.55;
+}
+
+/* 토픽 (문제·해결·결과 묶음) */
+.topic {
+  margin-top: 22px;
+}
+.topic + .topic {
+  margin-top: 26px;
+}
+.topic-title {
+  font-size: 10.5pt;
+  font-weight: 600;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  padding-left: 12px;
+  border-left: 3px solid var(--color-text);
+  color: var(--color-text);
+}
+.topic-title mark {
+  background-color: #fdf5d3;
+  color: inherit;
+  padding: 1px 3px;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.psr {
+  margin-top: 12px;
+}
+.psr + .psr {
+  margin-top: 14px;
+}
+.psr h5 {
+  margin-top: 0;
+  margin-bottom: 7px;
+  font-size: 8.5pt;
+}
+.psr ul {
+  margin: 0;
+  padding-left: 4px;
+}
+.psr li {
+  position: relative;
+  padding-left: 14px;
+  margin: 5px 0;
+  line-height: 1.6;
+  font-size: 9.5pt;
+}
+.psr li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+.psr code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 8.8pt;
+  padding: 1px 5px;
+  background: #f3f3f3;
+  border-radius: 3px;
+  color: var(--color-text);
+}
+
+/* 참여 프로젝트 목록 */
+.project-list-group {
+  margin-top: 12px;
+}
+.project-list-group h3 {
+  font-size: 10pt;
+  margin-bottom: 6px;
+}
+.compact-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px 16px;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+.compact-list li {
+  position: relative;
+  padding-left: 10px;
+  color: var(--color-text);
+}
+.compact-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+.compact-list .year {
+  color: var(--color-subtle);
+  font-size: 9pt;
+}
+
+/* 학력 / 링크 */
+.education table.simple th,
+.education table.simple td,
+.links table.simple th,
+.links table.simple td {
+  padding: 6px 10px;
+}
+
+/* 푸터 */
+.resume-footer {
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-hairline);
+  text-align: center;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+}
+
+/* 섹션 간 간격 */
+section + section {
+  margin-top: 8px;
+}
