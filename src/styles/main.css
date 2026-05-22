@@ -224,6 +224,9 @@ table.simple .col-role {
 .org-name {
   font-weight: 600;
 }
+.org-name-y-offset {
+  transform: translateY(2px);
+}
 
 /* 프로젝트 블록 */
 .project-block {
