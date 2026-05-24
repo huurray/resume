@@ -85,6 +85,7 @@
                     src="/images/tripleauth.png"
                     alt="트리플오스 로고"
                     class="org-logo"
+                    style="transform: translateY(2px)"
                   />
                   <span class="org-name org-name-y-offset">(주)트리플오스</span>
                 </span>
@@ -99,6 +100,7 @@
                     src="/images/bgzt.png"
                     alt="번개장터 로고"
                     class="org-logo org-logo--dark"
+                    style="transform: translateY(2px)"
                   />
                   <span class="org-name org-name-y-offset"
                     >번개장터 주식회사</span
@@ -119,6 +121,7 @@
                       background-color: #000;
                       border-color: #000;
                       border-width: 1px;
+                      transform: translateY(2px);
                     "
                   />
                   <span class="org-name">(주)라이앤캐처스</span>
@@ -627,6 +630,201 @@
             </div>
           </div>
         </article>
+
+        <!-- 번개장터 메시지센터 -->
+        <article class="project-block">
+          <h3>번개장터 메시지센터 &mdash; 번개톡 운영 어드민</h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              번개톡(번개장터 앱 알림톡)의 작성/타깃 추출/예약을 하나의 어드민에
+              통합한 마케팅 메시지 운영 도구입니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2023.01 &ndash; 2023.05</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>React</code><code>TypeScript</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >매번 개발팀을 거치던 알림톡 발송을 마케터 자율 운영 어드민으로
+                통합한 메시지센터</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  알림톡 발송이 개발자 의존적 &mdash;
+                  <strong
+                    >마케터 요청 → 개발팀 SQL 작업 → 발송팀 등록의 다단계
+                    프로세스</strong
+                  >로 캠페인 리드타임 김
+                </li>
+                <li>
+                  메시지 타입(쿠폰·공지·리텐션 등) 정의가 개발팀 문서에만 흩어져
+                  있어 <strong>정보가 파편화</strong>, 마케터가 타입별
+                  양식·변수를 매번 확인해야 하는 부담과
+                  <strong>변수 누락·포맷 오류로 인한 발송 사고 빈번</strong>
+                </li>
+                <li>
+                  타깃 추출·예약 발송 같은 운영 작업도
+                  <strong>개발팀 수동 처리에 의존</strong>해 캠페인 진행 병목과
+                  마케팅 사이클 둔화
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  마케터 인터뷰로 실제 작업 흐름·페인포인트를 정리,
+                  <strong
+                    >알림톡을 타입별로 분류해 입력 폼·필수 필드·검증 규칙을
+                    구분해 제공</strong
+                  >
+                </li>
+                <li>
+                  <strong>SQL 쿼리 에디터를 내장</strong>해 타깃 추출을 어드민
+                  내부에서 즉시 수행, 결과를 테이블로 검증 후 그대로 즉시
+                  발송·예약 가능
+                </li>
+                <li>
+                  실제 모바일 메시지 UI를 그대로 재현한
+                  <strong>미리보기 패널을 우측에 고정 배치</strong>해 발송 전
+                  변수·포맷·줄바꿈을 실물 그대로 검증
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  마케터가 개발팀 개입 없이 알림톡을 직접 작성·예약·발송,
+                  <strong>캠페인 진행 리드타임 단축</strong>
+                </li>
+                <li>
+                  타입별 검증·실시간 미리보기 강화로
+                  <strong>변수 누락·포맷 오류로 인한 발송 사고 감소</strong>
+                </li>
+                <li>
+                  흩어져 있던 발송·타깃·예약 작업을 단일 어드민으로 일원화,
+                  <strong>마케팅 운영의 자율도 확보</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 답다 (현재 PDF에서 제외 — 주석 처리) -->
+        <!--
+        <article class="project-block">
+          <h3>답다 &mdash; LG U+ 감정 케어 일기 앱</h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              사용자가 일기로 감정을 기록하면 AI가 맞춤형 답장을 제공하는 감정
+              케어 모바일 앱입니다. Flutter로 iOS·Android 크로스 플랫폼을 단일
+              코드베이스로 개발했습니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2024.08 &ndash; 2024.12</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>Flutter</code><code>Dart</code><code>Riverpod</code
+                ><code>Dio</code><code>AppsFlyer</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >네트워크 단절·앱 종료 어디서나 일기 손실 0을 보장하는
+                오프라인-우선 작성 파이프라인</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  일기는 한 번에 길게 쓰는 경우가 많아,
+                  <strong
+                    >작성 중에 앱이 꺼지거나 네트워크가 끊겨 글이 사라지면
+                    서비스에 큰 타격</strong
+                  >
+                </li>
+                <li>
+                  <strong
+                    >네트워크가 없는 환경에서도 글을 쓰고 등록할 수
+                    있어야</strong
+                  >
+                  사용자가 환경에 구애받지 않음 &mdash; 등록이 서버 호출에만
+                  의존하면 오프라인 사용 불가
+                </li>
+                <li>
+                  오프라인일 때 쌓인 등록 요청을
+                  <strong
+                    >인터넷이 다시 연결된 뒤 누락이나 중복 없이 서버로
+                    보내야</strong
+                  >
+                  데이터가 어긋나지 않음
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  <strong>Riverpod와 로컬 스토리지를 연동</strong>해 작성 중인
+                  글을 단말에 항상 저장, 화면을 벗어나거나 앱이 종료돼도 그대로
+                  남도록 처리
+                </li>
+                <li>
+                  <strong
+                    >타이핑이 잠시 멈춘 시점에만 저장하도록 Debounce 300ms
+                    적용</strong
+                  >, 너무 자주 저장하지 않으면서도 잃을 수 있는 글의 양을 최소화
+                </li>
+                <li>
+                  오프라인일 때는
+                  <strong>등록 요청을 단말의 대기열에 쌓아두고</strong>,
+                  네트워크가 돌아오면 <strong>차례로 자동 전송</strong>해
+                  사용자가 모르는 사이에 동기화 완료
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  <strong
+                    >앱이 갑자기 꺼지거나 네트워크가 끊겨도 작성한 글을 그대로
+                    되살릴 수 있음</strong
+                  >
+                </li>
+                <li>
+                  <strong>네트워크 없이도 글 작성·등록 가능</strong>, 연결이
+                  돌아오면 자동으로 서버에 반영되어 사용자는 인터넷 환경과
+                  무관하게 기록
+                </li>
+                <li>
+                  일기 앱에서 가장 중요한 &ldquo;기록 자체&rdquo;가 어떤
+                  상황에서도 안전하게 남는다는
+                  <strong>신뢰감 확보</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        -->
       </section>
 
       <!-- 오픈소스 -->

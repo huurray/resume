@@ -33,12 +33,15 @@ HTML/CSS로 작성한 개인 이력서. 브라우저 인쇄(`Cmd+P` → "PDF로 
 ## 개발 워크플로
 
 ### 일반 디자인 작업
+
 ```bash
 npm run dev    # http://localhost:5173/
 ```
+
 HMR로 즉시 반영. 화면에서 A4 비율(210mm × 297mm)이 시뮬레이션되어 보임.
 
 ### PDF 출력 검증 ⚠️ 중요
+
 **dev 서버의 HMR/캐시가 print.css 변경을 안 반영하는 경우가 있다.** PDF 추출 시 변경이 안 보이면 99% 이 케이스. 빌드 결과를 별도 서버로 띄워서 검증:
 
 ```bash
@@ -59,14 +62,14 @@ CSS 로드 순서: `reset.css → main.css → print.css`. 후행 파일이 우�
 
 #### 현재 정책 (페이지 꽉 채움 + 의미 단위 보호)
 
-| 단위 | 처리 | 이유 |
-|---|---|---|
-| `.psr` (문제점/해결/결과 각각) | `break-inside: avoid` | 한 줄만 떨어지면 가독성 ↓ |
-| `.project-meta` (회색 메타박스) | `break-inside: avoid` | 자르면 어색 |
-| `table.simple tr` | `break-inside: avoid` | 테이블 행 자르면 어색 |
-| 제목 (`h1~h5`) | `break-after: avoid` | 제목만 페이지 끝에 외로이 안 남도록 |
-| `.topic-title` (형광펜) | `break-after: avoid` | 형광펜 라인 다음 PSR과 함께 |
-| 그 외 (`.project-block`, `.topic`, `ul`) | 자연 흐름 | 페이지 경계 가로지름 허용 |
+| 단위                                     | 처리                  | 이유                                |
+| ---------------------------------------- | --------------------- | ----------------------------------- |
+| `.psr` (문제점/해결/결과 각각)           | `break-inside: avoid` | 한 줄만 떨어지면 가독성 ↓           |
+| `.project-meta` (회색 메타박스)          | `break-inside: avoid` | 자르면 어색                         |
+| `table.simple tr`                        | `break-inside: avoid` | 테이블 행 자르면 어색               |
+| 제목 (`h1~h5`)                           | `break-after: avoid`  | 제목만 페이지 끝에 외로이 안 남도록 |
+| `.topic-title` (형광펜)                  | `break-after: avoid`  | 형광펜 라인 다음 PSR과 함께         |
+| 그 외 (`.project-block`, `.topic`, `ul`) | 자연 흐름             | 페이지 경계 가로지름 허용           |
 
 ### 디자인 토큰 (main.css의 `:root`)
 
@@ -100,48 +103,61 @@ CSS 로드 순서: `reset.css → main.css → print.css`. 후행 파일이 우�
 
 ## 자주 마주칠 문제
 
-| 증상 | 원인 | 해결 |
-|---|---|---|
-| 변경했는데 PDF가 옛 결과 | dev 서버 HMR 미반영 또는 캐시 | `npm run build && npm run preview` → 4173 포트에서 인쇄 |
-| 페이지 사이 빈 공간 큼 | `break-inside: avoid`가 너무 큰 단위에 걸림 | print.css에서 작은 단위만 유지. main.css에는 break 규칙 두지 말 것 |
-| 형광펜·로고 색 PDF에서 빠짐 | Chrome 인쇄에서 "배경 그래픽" 꺼짐 | 인쇄 다이얼로그에서 켜기 |
-| 링크 클릭 안 됨 | CSS pseudo로만 텍스트를 만들었거나 형식 잘못 | 표준 `<a href>` 태그만 사용 |
-| `getComputedStyle()`로 확인 시 의도와 다른 값 | 화면(default media) 기준 결과임 | DevTools "Emulate CSS Media Type: print"로 전환 후 확인 |
+| 증상                                          | 원인                                         | 해결                                                               |
+| --------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------ |
+| 페이지 사이 빈 공간 큼                        | `break-inside: avoid`가 너무 큰 단위에 걸림  | print.css에서 작은 단위만 유지. main.css에는 break 규칙 두지 말 것 |
+| 형광펜·로고 색 PDF에서 빠짐                   | Chrome 인쇄에서 "배경 그래픽" 꺼짐           | 인쇄 다이얼로그에서 켜기                                           |
+| 링크 클릭 안 됨                               | CSS pseudo로만 텍스트를 만들었거나 형식 잘못 | 표준 `<a href>` 태그만 사용                                        |
+| `getComputedStyle()`로 확인 시 의도와 다른 값 | 화면(default media) 기준 결과임              | DevTools "Emulate CSS Media Type: print"로 전환 후 확인            |
 
 ## 콘텐츠 수정 시 패턴
 
 ### 새 프로젝트 추가
+
 ```html
 <article class="project-block">
   <h3>
-    <a href="https://..." target="_blank" rel="noopener noreferrer">프로젝트명 — 부제</a>
+    <a href="https://..." target="_blank" rel="noopener noreferrer"
+      >프로젝트명 — 부제</a
+    >
   </h3>
   <dl class="project-meta">
-    <dt>설명</dt><dd>한 줄 설명</dd>
-    <dt>진행 기간</dt><dd>YYYY.MM &ndash; YYYY.MM</dd>
+    <dt>설명</dt>
+    <dd>한 줄 설명</dd>
+    <dt>진행 기간</dt>
+    <dd>YYYY.MM &ndash; YYYY.MM</dd>
     <dt>기술 스택</dt>
-    <dd><span class="tech-stack"><code>React</code><code>Next.js</code>...</span></dd>
+    <dd>
+      <span class="tech-stack"><code>React</code><code>Next.js</code>...</span>
+    </dd>
   </dl>
 
   <div class="topic">
     <p class="topic-title"><mark>토픽 한 줄 요약</mark></p>
     <div class="psr">
       <h5>문제점</h5>
-      <ul><li>...</li></ul>
+      <ul>
+        <li>...</li>
+      </ul>
     </div>
     <div class="psr">
       <h5>해결 과정</h5>
-      <ul><li>...</li></ul>
+      <ul>
+        <li>...</li>
+      </ul>
     </div>
     <div class="psr">
       <h5>결과</h5>
-      <ul><li>...</li></ul>
+      <ul>
+        <li>...</li>
+      </ul>
     </div>
   </div>
 </article>
 ```
 
 ### 새 회사 로고 추가 (경력 테이블)
+
 - 이미지 파일을 `public/images/`에 배치
 - `<img src="/images/파일명.png" alt="회사명 로고" class="org-logo" />` (또는 어두운 톤이면 `class="org-logo org-logo--dark"`)
 - `(주)` 같은 prefix는 `org-name` span 안에 텍스트로
