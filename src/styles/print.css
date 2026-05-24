@@ -48,9 +48,8 @@
     page-break-after: avoid;
   }
 
-  /* 작은 박스(메타박스, 테이블 행, 문제점/해결/결과 묶음)만 통째로 유지 — 자르면 어색 */
-  .project-meta,
-  .psr {
+  /* 작은 박스(메타박스, 테이블 행, 참여 프로젝트 그룹)만 통째로 유지 — 자르면 어색 */
+  .project-meta {
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
@@ -58,9 +57,23 @@
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
+  .project-list-group {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
 
-  /* 그 외(.project-block, .topic, .psr, ul, li …)에는 break-inside avoid 없음
-     → 문제점/해결/결과 안에서도 자유롭게 페이지를 가로질러 흐름 */
+  /* PSR 묶음(문제점/해결 과정/결과)은 페이지 사이에서 자유롭게 끊김 허용
+     단, 제목(h5)이 마지막 줄에 외롭게 안 남도록, 각 li는 통째 유지 */
+  .psr h5 {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+  .psr li {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* 그 외(.project-block, .topic, ul)는 자연 흐름으로 페이지 가로지름 허용 */
 
   /* 한 줄 외톨이만 최소화 */
   p, li {
