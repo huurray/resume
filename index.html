@@ -248,104 +248,6 @@
           </div>
         </article>
 
-        <!-- FilterRag -->
-        <article class="project-block">
-          <h3>FilterRag &mdash; 콘텐츠 필터 SaaS 관리자 콘솔</h3>
-          <dl class="project-meta">
-            <dt>설명</dt>
-            <dd>
-              키워드 매칭, 의미론적 유사도, LLM 검증까지 다양한 방식의 콘텐츠
-              필터링(욕설 등)을 제공하는 SaaS의 관리자 웹입니다.
-            </dd>
-            <dt>진행 기간</dt>
-            <dd>2025.07 &ndash; 2025.09</dd>
-            <dt>기술 스택</dt>
-            <dd>
-              <span class="tech-stack">
-                <code>React</code><code>Vite</code><code>TypeScript</code
-                ><code>Tailwind</code><code>TanStack Router</code
-                ><code>Zod</code>
-              </span>
-            </dd>
-          </dl>
-
-          <div class="topic">
-            <p class="topic-title">
-              <mark
-                >단일 Docker 이미지로 다수 고객사 환경에 대응하는 배포 구조
-                설계</mark
-              >
-            </p>
-            <div class="psr">
-              <h5>문제점</h5>
-              <ul>
-                <li>
-                  <strong
-                    >온프레미스 SaaS 특성상 고객사마다 API 엔드포인트·활성화
-                    기능·브랜딩이 모두 상이</strong
-                  >
-                </li>
-                <li>
-                  고객사별 이미지 빌드 시
-                  <strong
-                    >산출물 N개 관리 부담과 설정 변경 시 전체 재빌드
-                    발생</strong
-                  >
-                </li>
-                <li>
-                  환경 종속 값을 빌드 타임 환경변수로 처리하면
-                  <strong>번들에 고정되어 재배포 없이 변경 불가</strong>
-                </li>
-              </ul>
-            </div>
-            <div class="psr">
-              <h5>해결 과정</h5>
-              <ul>
-                <li>
-                  <strong>환경 종속 값과 테넌트 종속 값을 분리</strong>하여
-                  생각하고 단일 도커 이미지 재사용 구조 확립
-                </li>
-                <li>
-                  컨테이너 기동 시점 CMD 스크립트에서 환경변수를 읽어
-                  <code>window.ENV_CONFIG</code> 파일을 동적 생성,
-                  <strong
-                    >메인 번들보다 앞서 로드시켜 런타임에 엔드포인트
-                    주입</strong
-                  >
-                </li>
-                <li>
-                  상위 관리자 웹에서 고객사별 기능·브랜딩을 세팅하고,
-                  <strong
-                    >로그인 시점에 소속 식별 후 전역 store에 주입하여 UI를
-                    런타임 재구성</strong
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="psr">
-              <h5>결과</h5>
-              <ul>
-                <li>
-                  <strong
-                    >단일 이미지로 제일기획·삼성전자 등 다수 엔터프라이즈 고객사
-                    동시 서비스</strong
-                  >
-                </li>
-                <li>
-                  신규 고객사 온보딩 작업이
-                  <strong
-                    >빌드·배포 사이클에서 환경변수 세팅 수준으로 축소</strong
-                  >
-                </li>
-                <li>
-                  운영팀이 관리자 웹에서 고객사별 설정을 직접 제어,
-                  <strong>개발팀 개입 없는 자율 운영 체계 확보</strong>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
         <!-- 아타(ATA) -->
         <article class="project-block">
           <h3>
@@ -521,6 +423,104 @@
                     >파서·렌더러 양쪽 분기 추가만으로 대응 가능한 확장 구조
                     확보</strong
                   >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- FilterRag -->
+        <article class="project-block">
+          <h3>FilterRag &mdash; 콘텐츠 필터 SaaS 관리자 콘솔</h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              키워드 매칭, 의미론적 유사도, LLM 검증까지 다양한 방식의 콘텐츠
+              필터링(욕설 등)을 제공하는 SaaS의 관리자 웹입니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2025.07 &ndash; 2025.09</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>React</code><code>Vite</code><code>TypeScript</code
+                ><code>Tailwind</code><code>TanStack Router</code
+                ><code>Zod</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >단일 Docker 이미지로 다수 고객사 환경에 대응하는 배포 구조
+                설계</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  <strong
+                    >온프레미스 SaaS 특성상 고객사마다 API 엔드포인트·활성화
+                    기능·브랜딩이 모두 상이</strong
+                  >
+                </li>
+                <li>
+                  고객사별 이미지 빌드 시
+                  <strong
+                    >산출물 N개 관리 부담과 설정 변경 시 전체 재빌드
+                    발생</strong
+                  >
+                </li>
+                <li>
+                  환경 종속 값을 빌드 타임 환경변수로 처리하면
+                  <strong>번들에 고정되어 재배포 없이 변경 불가</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  <strong>환경 종속 값과 테넌트 종속 값을 분리</strong>하여
+                  생각하고 단일 도커 이미지 재사용 구조 확립
+                </li>
+                <li>
+                  컨테이너 기동 시점 CMD 스크립트에서 환경변수를 읽어
+                  <code>window.ENV_CONFIG</code> 파일을 동적 생성,
+                  <strong
+                    >메인 번들보다 앞서 로드시켜 런타임에 엔드포인트
+                    주입</strong
+                  >
+                </li>
+                <li>
+                  상위 관리자 웹에서 고객사별 기능·브랜딩을 세팅하고,
+                  <strong
+                    >로그인 시점에 소속 식별 후 전역 store에 주입하여 UI를
+                    런타임 재구성</strong
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  <strong
+                    >단일 이미지로 제일기획·삼성전자 등 다수 엔터프라이즈 고객사
+                    동시 서비스</strong
+                  >
+                </li>
+                <li>
+                  신규 고객사 온보딩 작업이
+                  <strong
+                    >빌드·배포 사이클에서 환경변수 세팅 수준으로 축소</strong
+                  >
+                </li>
+                <li>
+                  운영팀이 관리자 웹에서 고객사별 설정을 직접 제어,
+                  <strong>개발팀 개입 없는 자율 운영 체계 확보</strong>
                 </li>
               </ul>
             </div>
