@@ -64,12 +64,12 @@ CSS 로드 순서: `reset.css → main.css → print.css`. 후행 파일이 우�
 
 | 단위                                     | 처리                  | 이유                                |
 | ---------------------------------------- | --------------------- | ----------------------------------- |
-| `.psr` (문제점/해결/결과 각각)           | `break-inside: avoid` | 한 줄만 떨어지면 가독성 ↓           |
+| `.psr li` (PSR 개별 항목)                | `break-inside: avoid` | 항목 한 줄만 떨어지면 가독성 ↓      |
 | `.project-meta` (회색 메타박스)          | `break-inside: avoid` | 자르면 어색                         |
 | `table.simple tr`                        | `break-inside: avoid` | 테이블 행 자르면 어색               |
 | 제목 (`h1~h5`)                           | `break-after: avoid`  | 제목만 페이지 끝에 외로이 안 남도록 |
 | `.topic-title` (형광펜)                  | `break-after: avoid`  | 형광펜 라인 다음 PSR과 함께         |
-| 그 외 (`.project-block`, `.topic`, `ul`) | 자연 흐름             | 페이지 경계 가로지름 허용           |
+| `.psr` 묶음·그 외 (`.project-block` 등)  | 자연 흐름             | 페이지를 꽉 채우도록 경계 가로지름  |
 
 ### 디자인 토큰 (main.css의 `:root`)
 

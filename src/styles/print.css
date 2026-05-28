@@ -19,7 +19,9 @@
   }
 
   /* 색상 정확도 */
-  html, body, * {
+  html,
+  body,
+  * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -39,7 +41,11 @@
 
   /* 페이지 break 제어 — 페이지를 꽉 채우는 자연 흐름 */
   /* 제목/형광펜이 페이지 마지막 줄에 외롭게 남지만 않도록 */
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     break-after: avoid-page;
     page-break-after: avoid;
   }
@@ -62,8 +68,8 @@
     page-break-inside: avoid;
   }
 
-  /* PSR 묶음(문제점/해결 과정/결과)은 페이지 사이에서 자유롭게 끊김 허용
-     단, 제목(h5)이 마지막 줄에 외롭게 안 남도록, 각 li는 통째 유지 */
+  /* PSR 묶음은 페이지 경계를 가로질러 페이지를 꽉 채우되,
+     제목(h5)은 외톨이로 남지 않게, 개별 항목(li)은 잘리지 않게 보호 */
   .psr h5 {
     break-after: avoid-page;
     page-break-after: avoid;
@@ -76,7 +82,8 @@
   /* 그 외(.project-block, .topic, ul)는 자연 흐름으로 페이지 가로지름 허용 */
 
   /* 한 줄 외톨이만 최소화 */
-  p, li {
+  p,
+  li {
     orphans: 2;
     widows: 2;
   }
