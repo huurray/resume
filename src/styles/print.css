@@ -54,16 +54,17 @@
     page-break-after: avoid;
   }
 
-  /* 작은 박스(메타박스, 테이블 행, 참여 프로젝트 그룹)만 통째로 유지 — 자르면 어색 */
+  /* 작은 박스(메타박스, 성과 띠, 테이블 행)만 통째로 유지 — 자르면 어색 */
+  /* 참여 프로젝트 목록은 자연 흐름 — 앞 페이지 하단 빈 공간을 채우도록 break 규칙을 두지 않음 */
   .project-meta {
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
-  table.simple tr {
+  .highlights {
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
-  .project-list-group {
+  table.simple tr {
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
