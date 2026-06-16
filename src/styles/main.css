@@ -269,7 +269,7 @@ table.simple .col-role {
   margin-top: 20px;
 }
 .project-block + .project-block {
-  margin-top: 34px;
+  margin-top: 28px;
 }
 .project-block h3 {
   margin-top: 0;
@@ -349,7 +349,7 @@ table.simple .col-role {
   margin-top: 22px;
 }
 .topic + .topic {
-  margin-top: 26px;
+  margin-top: 22px;
 }
 .topic-title {
   font-size: 10.5pt;
@@ -372,7 +372,7 @@ table.simple .col-role {
   margin-top: 12px;
 }
 .psr + .psr {
-  margin-top: 14px;
+  margin-top: 12px;
 }
 .psr h5 {
   margin-top: 0;
@@ -386,7 +386,7 @@ table.simple .col-role {
 .psr li {
   position: relative;
   padding-left: 14px;
-  margin: 5px 0;
+  margin: 4px 0;
   line-height: 1.6;
   font-size: 9.5pt;
 }
