@@ -164,111 +164,6 @@
       <section class="projects">
         <h2>프로젝트</h2>
 
-        <!-- 모두의 창업 -->
-        <article class="project-block">
-          <h3>
-            <a
-              href="https://www.modoo.or.kr"
-              target="_blank"
-              rel="noopener noreferrer"
-              >모두의 창업 &mdash; 국가 창업 플랫폼</a
-            >
-          </h3>
-          <dl class="project-meta">
-            <dt>설명</dt>
-            <dd>
-              중소벤처기업부 주관 국가 창업 프로젝트 &lsquo;모두의 창업&rsquo;
-              웹 플랫폼입니다. 창업 경연, 커뮤니티 등을 제공합니다.
-            </dd>
-            <dt>진행 기간</dt>
-            <dd>2026.02 &ndash; 2026.05</dd>
-            <dt>기술 스택</dt>
-            <dd>
-              <span class="tech-stack">
-                <code>React</code><code>Next.js</code><code>TypeScript</code
-                ><code>Tailwind</code><code>Motion</code><code>Sentry</code>
-              </span>
-            </dd>
-          </dl>
-
-          <div class="topic">
-            <p class="topic-title">
-              <mark
-                >콘텐츠 유출 없이 사전 색인을 확보해 런칭 당일 핵심 키워드 1면
-                노출을 만든 SEO 설계</mark
-              >
-            </p>
-            <div class="psr">
-              <h5>문제점</h5>
-              <ul>
-                <li>
-                  <strong>신규 도메인의 색인 리드 타임</strong>으로 런칭 시점
-                  핵심 키워드 상단 노출 보장 불가
-                </li>
-                <li>
-                  <strong
-                    >크롤러에게는 사전 색인 허용, 유저에게는 대외비 콘텐츠
-                    미노출</strong
-                  >이라는 상충 조건 존재
-                </li>
-                <li>
-                  Vercel Preview가 퍼블릭 URL로 노출되어
-                  <strong
-                    >preprod 환경이 프로덕션보다 먼저 색인되는 역전
-                    리스크</strong
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="psr">
-              <h5>해결 과정</h5>
-              <ul>
-                <li>
-                  개발 기간이 빠듯해
-                  <strong>런칭 2주 전부터 각 페이지 메타데이터를 선구축</strong
-                  >, 색인 시간 우선 확보
-                </li>
-                <li>
-                  Next.js rewrites에서
-                  <strong
-                    >User-Agent 기반으로 크롤러만 실제 라우트로 분기</strong
-                  >, 그 외 요청은 티저 페이지로 리다이렉트
-                </li>
-                <li>
-                  <strong>JsonLd 컴포넌트·next-seo로 메타데이터 표준화</strong>,
-                  sitemap.xml을 API Route에서 DB 조회 기반으로 동적 생성하여
-                  신규 콘텐츠 자동 색인
-                </li>
-                <li>
-                  <strong>IP로 preprod 접근 제한</strong>, robots.txt를 API
-                  Route에서 <code>VERCEL_ENV</code>에 따라 동적 응답하여 환경별
-                  크롤링 정책 자동화
-                </li>
-              </ul>
-            </div>
-            <div class="psr">
-              <h5>결과</h5>
-              <ul>
-                <li>
-                  <strong>콘텐츠 유출 없이 사전 색인 확보</strong>, 런칭 당일
-                  &ldquo;모두의 창업&rdquo; 등 핵심 키워드 1면 노출 달성
-                </li>
-                <li>
-                  <strong
-                    >검색어 유료 광고 없이 오가닉 검색 유입만으로 런칭일
-                    <span class="metric">DAU 5만</span> 달성</strong
-                  >
-                </li>
-                <li>
-                  환경별 SEO 정책을
-                  <strong>파이프라인 레벨에서 자동화</strong>하여 별도 운영
-                  리소스 없이 지속 가능한 색인 관리 체계 구축
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
         <!-- 아타(ATA) -->
         <article class="project-block">
           <h3>
@@ -442,6 +337,111 @@
                     >파서·렌더러 양쪽 분기 추가만으로 대응 가능한 확장 구조
                     확보</strong
                   >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 모두의 창업 -->
+        <article class="project-block">
+          <h3>
+            <a
+              href="https://www.modoo.or.kr"
+              target="_blank"
+              rel="noopener noreferrer"
+              >모두의 창업 &mdash; 국가 창업 플랫폼</a
+            >
+          </h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              중소벤처기업부 주관 국가 창업 프로젝트 &lsquo;모두의 창업&rsquo;
+              웹 플랫폼입니다. 창업 경연, 커뮤니티 등을 제공합니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2026.02 &ndash; 2026.05</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>React</code><code>Next.js</code><code>TypeScript</code
+                ><code>Tailwind</code><code>Motion</code><code>Sentry</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >콘텐츠 유출 없이 사전 색인을 확보해 런칭 당일 핵심 키워드 1면
+                노출을 만든 SEO 설계</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  <strong>신규 도메인의 색인 리드 타임</strong>으로 런칭 시점
+                  핵심 키워드 상단 노출 보장 불가
+                </li>
+                <li>
+                  <strong
+                    >크롤러에게는 사전 색인 허용, 유저에게는 대외비 콘텐츠
+                    미노출</strong
+                  >이라는 상충 조건 존재
+                </li>
+                <li>
+                  Vercel Preview가 퍼블릭 URL로 노출되어
+                  <strong
+                    >preprod 환경이 프로덕션보다 먼저 색인되는 역전
+                    리스크</strong
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  개발 기간이 빠듯해
+                  <strong>런칭 2주 전부터 각 페이지 메타데이터를 선구축</strong
+                  >, 색인 시간 우선 확보
+                </li>
+                <li>
+                  Next.js rewrites에서
+                  <strong
+                    >User-Agent 기반으로 크롤러만 실제 라우트로 분기</strong
+                  >, 그 외 요청은 티저 페이지로 리다이렉트
+                </li>
+                <li>
+                  <strong>JsonLd 컴포넌트·next-seo로 메타데이터 표준화</strong>,
+                  sitemap.xml을 API Route에서 DB 조회 기반으로 동적 생성하여
+                  신규 콘텐츠 자동 색인
+                </li>
+                <li>
+                  <strong>IP로 preprod 접근 제한</strong>, robots.txt를 API
+                  Route에서 <code>VERCEL_ENV</code>에 따라 동적 응답하여 환경별
+                  크롤링 정책 자동화
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  <strong>콘텐츠 유출 없이 사전 색인 확보</strong>, 런칭 당일
+                  &ldquo;모두의 창업&rdquo; 등 핵심 키워드 1면 노출 달성
+                </li>
+                <li>
+                  <strong
+                    >검색어 유료 광고 없이 오가닉 검색 유입만으로 런칭일
+                    <span class="metric">DAU 5만</span> 달성</strong
+                  >
+                </li>
+                <li>
+                  환경별 SEO 정책을
+                  <strong>파이프라인 레벨에서 자동화</strong>하여 별도 운영
+                  리소스 없이 지속 가능한 색인 관리 체계 구축
                 </li>
               </ul>
             </div>
