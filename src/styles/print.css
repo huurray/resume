@@ -59,6 +59,9 @@
   .project-meta {
     break-inside: avoid-page;
     page-break-inside: avoid;
+    /* 주의: 여기에 break-after: avoid를 추가하면 (메타+토픽제목+h5+첫 li)가
+       한 덩어리로 묶여 페이지 하단에 큰 빈 공간이 생기고 총 페이지가 늘어남.
+       실측 결과 '꽉 채움'이 더 나아서 프로젝트 헤더의 페이지 끝 걸침은 허용 */
   }
   .highlights {
     break-inside: avoid-page;
