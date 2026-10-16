@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>허준혁 | Frontend Engineer</title>
+    <title>허준혁 | Fullstack Engineer</title>
     <meta
       name="description"
-      content="허준혁 — 6년 차 프론트엔드 개발자 이력서"
+      content="허준혁 — 6년 차 풀스택 개발자 이력서"
     />
     <link rel="stylesheet" href="/src/styles/reset.css" />
     <link rel="stylesheet" href="/src/styles/main.css" />
@@ -60,18 +60,24 @@
       <section class="intro">
         <h2>자기소개</h2>
         <p>
-          코드를 작성하기 전에 이 기능이 비즈니스에 무엇을 남기는지부터
-          고민하고, 그 답을 제품으로 만들어 온
-          <strong>6년 차 프론트엔드 개발자</strong>입니다. 소수 인원의 초기
-          스타트업에서
-          <strong>기획·디자인·마케팅까지 직접 이끌며</strong> 개발해 왔고,
-          <strong>트리플오스 창립 멤버</strong>로 다양한 프로젝트 출시를
-          주도하면서 대규모 트래픽 서비스부터 복잡한 어드민 시스템까지 기술적
-          난제를 직접 설계하고 해결해 왔습니다. 이런 경험을 거쳐오면서 개발을
-          기술이 아니라 <strong>비즈니스 임팩트</strong>로 읽는 눈을 길러
-          왔습니다.
+          코드보다 먼저 이 기능이 <strong>비즈니스에 무엇을 남기는지</strong>
+          묻는 <strong>6년 차 풀스택 개발자</strong>입니다. 6년간
+          프론트엔드 개발자로 번개장터의 대규모 트래픽 서비스, 런칭일 DAU
+          5만을 기록한 국가 창업 플랫폼, 멀티 AI 채팅 플랫폼까지 만들어
+          왔습니다. 지금은 푸드테크에서
+          <strong>프론트엔드·백엔드·데이터를 함께 다루며</strong> 프랜차이즈
+          데이터 솔루션 프랜디의 AI 채팅을 시멘틱 레이어와 에이전트 루프
+          구조로 처음부터 다시 설계하고 있습니다. 판단은 감이 아니라
+          <strong>측정</strong>으로 합니다. 운영 질문 400건으로 회귀 평가
+          체계를 직접 만들어, 설계를 바꿀 때마다 정확도·속도·비용으로 검증한
+          뒤 채택했습니다. 작은 팀에서 기획·디자인·마케팅까지 직접 이끌어 본
+          경험으로, 화면 너머의 사용자와 사업까지 함께 봅니다.
         </p>
         <ul class="highlights">
+          <li>
+            <span class="hl-value">정답률 30→84%</span>
+            <span class="hl-label">프랜디 AI 에이전트 재설계</span>
+          </li>
           <li>
             <span class="hl-value">대규모 트래픽 경험</span>
             <span class="hl-label">번개장터 · 모두의 창업</span>
@@ -83,10 +89,6 @@
           <li>
             <span class="hl-value">런칭일 DAU 5만</span>
             <span class="hl-label">모두의 창업 SEO</span>
-          </li>
-          <li>
-            <span class="hl-value">0→1 구현 경험</span>
-            <span class="hl-label">멀티 AI 채팅 플랫폼</span>
           </li>
         </ul>
       </section>
@@ -103,6 +105,21 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>
+                <span class="org-cell">
+                  <img
+                    src="/images/foodtech.png"
+                    alt="푸드테크 로고"
+                    class="org-logo"
+                    style="transform: translateY(2px)"
+                  />
+                  <span class="org-name org-name-y-offset">(주)푸드테크</span>
+                </span>
+              </td>
+              <td class="col-period">2026.08 &ndash; 재직 중</td>
+              <td class="col-role">Fullstack Engineer</td>
+            </tr>
             <tr>
               <td>
                 <span class="org-cell">
@@ -164,6 +181,201 @@
       <!-- 프로젝트 -->
       <section class="projects">
         <h2>프로젝트</h2>
+
+        <!-- 프랜디 AI 채팅 -->
+        <article class="project-block">
+          <h3>
+            <a
+              href="https://main.frand.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              >프랜디(Fran:D) AI 채팅 &mdash; 프랜차이즈 데이터 분석 에이전트</a
+            >
+          </h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              프랜차이즈 본부·점주가 &ldquo;지난달 서울 매장 매출 순위&rdquo;처럼
+              말로 물으면 38개 브랜드·1.2만 매장의 POS·배달앱 데이터를 조회해
+              답변·차트·표로 보여 주는 AI 채팅입니다. 기존 LLM 파이프라인을
+              시멘틱 레이어와 에이전트 루프 구조로 전면 재설계했습니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2026.09 &ndash; 진행 중(출시 준비)</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>Python</code><code>FastAPI</code><code>AWS Bedrock</code
+                ><code>Claude</code><code>Snowflake</code><code>sqlglot</code
+                ><code>SSE</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >흩어진 지표 정의를 시멘틱 레이어로 단일화해 정답률을 30%에서
+                84%로 끌어올린 Text-to-SQL 재설계</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  &lsquo;실매출&rsquo; 같은 핵심 지표 식이
+                  <strong>프롬프트 16곳·예시 SQL 67개에 흩어져</strong>, 정의
+                  하나를 바꾸려면 여러 곳을 고쳐야 하고 곳마다 계산이 어긋남
+                </li>
+                <li>
+                  LLM이 예시 SQL을 참고해 매번 SQL을 처음부터 작성 &mdash;
+                  배달비 제외 조건이
+                  <strong>메뉴 SQL의 34%에만 들어가는</strong> 등 같은 질문에도
+                  숫자가 흔들림
+                </li>
+                <li>
+                  값싼 모델의 실수를 규칙으로 덧대 온 결과,
+                  <strong
+                    >앞단 프롬프트의 약 25%가 사례 하나를 막는 규칙, 28%가
+                    중복</strong
+                  >인 유지보수 한계 상태
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  표 11개·<strong>지표 34개·차원 37개·조건 21개</strong>를 YAML
+                  시멘틱 레이어에 정의해 지표의
+                  <strong>단일 진실 공급원(SSOT)</strong>으로 삼고, 예시 SQL
+                  123개를 표현 예시 32개로 대체
+                </li>
+                <li>
+                  LLM은 &lsquo;무엇을 물었는지&rsquo;만 스펙(지표·차원·기간의
+                  뜻)으로 채우고,
+                  <strong>날짜 계산·조건 조립은 코드가 맡도록</strong> 책임을
+                  분리
+                </li>
+                <li>
+                  흔한 질문은 <strong>결정론적 SQL 조립기</strong>가 정의
+                  파일만으로 SQL을 만들고, 조립할 수 없는 질문만 LLM이 작성
+                  &mdash; 두 경로가 같은 조건 조각을 공유해 정의가 갈라지지 않음
+                </li>
+                <li>
+                  생성 SQL은 실행 전
+                  <strong>sqlglot 기반 브랜드 범위 검사</strong>·읽기 전용·단일
+                  문장·시간 제한을 거쳐 고객사 간 데이터 노출을 구조적으로 차단
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  실패 사례를 포함한 운영 실질문 400건 회귀에서
+                  <strong
+                    >정답률
+                    <span class="metric">30% → 84%</span></strong
+                  >
+                  (비교 가능 302건, 블라인드 LLM 판정)
+                </li>
+                <li>
+                  조립기 SQL이 LLM SQL과
+                  <strong>25건 모두 행 수·합계 일치</strong>함을 운영 데이터로
+                  검증, 판매량이 옵션·배달비 행까지 세어
+                  <strong>약 3.8배 부풀려지던 정의 오류</strong>도 정의 파일 한
+                  곳에서 바로잡음
+                </li>
+                <li>
+                  <strong>새 지표 추가가 YAML 항목 1개로 끝나는 구조</strong>
+                  &mdash; 판매단가 지표를 코드 수정 없이 추가
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >LLM 10단계 직렬 파이프라인을 단일 에이전트 루프로 바꿔 응답
+                시간을 절반 이하로 줄인 구조 개편</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  질문 하나에 의도 분류·날짜 해석·이름 식별 8종·SQL 생성·차트
+                  추천 등
+                  <strong>LLM을 9~10번 차례로 호출</strong>, 그 사이 규칙 코드
+                  100여 개 &mdash; 응답 시간 중간값 42초, 이해 단계에만 18초
+                </li>
+                <li>
+                  단계별 모델 설정 16개, 단계가 실패하면 &lsquo;최근 7일&rsquo;
+                  같은 <strong>기본값으로 조용히 넘어가</strong> 틀린 답의 원인
+                  추적이 어려움
+                </li>
+                <li>
+                  여러 번 조회가 필요한 질문용 기존 감독형 에이전트는 이
+                  파이프라인 전체를 도구로 감싸,
+                  <strong>다단계 질문 하나에 55초·약 $0.2</strong>로 느리고
+                  비쌈
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  <strong
+                    >모델 하나(Claude Sonnet)가 도구 5개(이름 찾기·되묻기·쿼리
+                    작업·날씨·끝내기)를 쓰는 tool-use 루프</strong
+                  >로 재설계, 도구가 필요 없는 질문은 한 번에 끝나는 빠른 길로
+                  처리
+                </li>
+                <li>
+                  <strong>LLM 12회·180초·$1 예산 한도</strong>와 헛돎·빈
+                  응답·없는 도구 호출 대비 규칙으로 루프 폭주를 막고,
+                  <strong>새 도구는 파일 1개·목록 1줄로 추가</strong>되는 확장
+                  구조 설계
+                </li>
+                <li>
+                  운영 질문 2,509건에서 기준 세트 400건을 뽑아
+                  <strong
+                    >v1 운영 기록과 비교하는 회귀 하네스·블라인드 LLM
+                    판정</strong
+                  >을 직접 구축, 단계마다 정확도·시간·비용을 재서 채택 여부 결정
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  운영 질문 400건 재실행 기준
+                  <strong
+                    >응답 시간 중간값
+                    <span class="metric">42초 → 18.8초</span></strong
+                  >
+                  (약 55% 단축), 이해 단계 모델을 Haiku에서 Sonnet으로 올리고도
+                  질문당 비용은 기존 수준 유지
+                </li>
+                <li>
+                  다단계 질문은 기존 감독형 에이전트 대비
+                  <strong
+                    ><span class="metric">55초 → 30초</span>, 비용 약 40%
+                    절감</strong
+                  >에 정답률도 83% → 88%로 개선
+                </li>
+                <li>
+                  v1 29개 파일·<strong>Python 2.5만 줄 삭제</strong>, 모델 설정
+                  16개 → 4개, 벡터 검색(OpenSearch) 의존 제거로 운영 구조 단순화
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
 
         <!-- 아타(ATA) -->
         <article class="project-block">
@@ -1323,6 +1535,10 @@
         <div class="project-list-group">
           <h3>서버 개발 및 DB 구축</h3>
           <ul class="compact-list">
+            <li>
+              프랜디 AI 데이터 분석 에이전트 (Python / FastAPI)
+              <span class="year">— 2026</span>
+            </li>
             <li>
               길냥이 지도 웹 서버 개발 (Node.js / MySQL)
               <span class="year">— 2023</span>
