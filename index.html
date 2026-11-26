@@ -376,6 +376,399 @@
           </div>
         </article>
 
+        <!-- 프랜디 MCP -->
+        <article class="project-block">
+          <h3>
+            <a
+              href="https://main.frand.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              >프랜디(Fran:D) MCP &mdash; 외부 AI 앱용 데이터 연결 서버</a
+            >
+          </h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              고객사 본부 직원이 쓰는 AI 앱(Claude·ChatGPT·Claude Code·Codex)에
+              프랜디를 MCP(Model Context Protocol)로 연결해, AI가 자기 브랜드의
+              매출·메뉴·매장 통계를 직접 조회해 답하게 하는 서버입니다. MCP
+              서버·OAuth 인증 서버부터 웹 연결 화면·어드민 모니터링까지 4개
+              레포를 단독 개발했습니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2026.11 &ndash; 2026.12</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>Python</code><code>FastAPI</code><code>MCP SDK</code
+                ><code>OAuth 2.1</code><code>MySQL</code><code>Redis</code
+                ><code>Next.js</code><code>AWS WAF</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >고객 데이터가 외부 AI로 나가는 연결을 OAuth 인증 서버·브랜드
+                격리·WAF 다층 방어로 지킨 보안 설계</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  고객사 통계가 <strong>외부 AI 회사 서버로 나가는</strong>
+                  기능인데, 서비스가 DB 계정 하나로 모든 브랜드를 읽는 구조라
+                  <strong>코드 한 곳만 새도 타사 데이터가 노출</strong>
+                </li>
+                <li>
+                  Claude·ChatGPT 앱은 OAuth만 받는데, 기존 웹 JWT는 용도(aud)
+                  구분이 없어 재사용하면
+                  <strong>웹 토큰·100년짜리 마스터 토큰으로도 MCP가 열리는</strong>
+                  구조
+                </li>
+                <li>
+                  로그인 없이 부를 수 있는 <code>/oauth/*</code> 경로가 요청마다
+                  Redis에 기록을 남기는데, 서버에는 로드밸런서 IP만 보여
+                  <strong>앱 안에서 IP별 제한 불가</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  <strong
+                    >OAuth 2.1(PKCE S256) 인증 서버를 CIMD 방식으로 직접
+                    구현</strong
+                  >
+                  &mdash; 허용 목록의 앱만 받고 리다이렉트를 따라가지 않아
+                  SSRF(내부망 요청 유도)를 막고, 돌아갈 주소는 글자 그대로 비교
+                </li>
+                <li>
+                  토큰은 SHA-256 지문만 저장하는
+                  <strong>MCP 전용 불투명 토큰</strong>으로 웹과 분리(액세스
+                  1시간·리프레시 30일 회전·연결 최대 90일), 이미 쓴 리프레시가
+                  다시 오면 탈취로 보고 연결 해지
+                </li>
+                <li>
+                  AI는 SQL 없이
+                  <strong>미리 만든 조회 도구 8개의 입력값만</strong> 고르게 하고,
+                  브랜드는 토큰에 싣지 않고 호출마다 한 곳에서 다시 계산해 모든
+                  쿼리에 기업·법인·브랜드 3중 조건을 공용 함수로 강제
+                </li>
+                <li>
+                  <strong
+                    >앞단 AWS WAF로 <code>/oauth/*</code> IP별 요청 비율을
+                    제한</strong
+                  >하고, <code>/mcp</code> Host·Origin 검사(DNS 재바인딩
+                  방어)·허락 화면 클릭재킹 차단·사용자별 분당 60·일 2,000회
+                  한도·쿼리 30초 제한으로 다층 방어
+                </li>
+                <li>
+                  회사 스위치와 직원 허락 화면의 <strong>2단 동의</strong>를 두고,
+                  비밀번호 변경·스위치 끔·관리자 해지·탈취 의심 등
+                  <strong>8가지 사유로 연결 해지</strong>, KISA 기준 권한
+                  로그·호출 기록·슬랙 이상 알림 연동
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  위조 토큰·PKCE 누락·SSRF·리다이렉트 변조·Host 위조 등
+                  <strong
+                    >외부 공격 시나리오
+                    <span class="metric">27종</span> 점검을 QA에서 모두
+                    통과</strong
+                  >
+                </li>
+                <li>
+                  같은 매장 코드를 쓰는 타사·형제 브랜드까지 넣은
+                  <strong>브랜드 격리 테스트 32개</strong>를 포함해 MCP 테스트
+                  236개로 회귀 방지
+                </li>
+                <li>
+                  비밀번호 변경·회사 스위치 끔 직후 기존 연결이
+                  <strong>바로 끊기는 것</strong>을 실제 Claude Code 연결로
+                  확인하고, 다른 브랜드·개인정보를 물어도 데이터가 나가지 않음을
+                  실데이터 테스트로 확인
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >실데이터 테스트로 찾은 메모리·속도 병목을 결과 변화 없이 잡아
+                대형 브랜드 조회를 안정화한 도구 최적화</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  매장 2천여 곳 대형 브랜드의 6개월 매장 순위를 한 번 조회하면
+                  <strong>메모리가 약 540MB 늘고</strong>, 같은 조회 중 1GiB QA
+                  서버가 502·503 오류를 냄
+                </li>
+                <li>
+                  AI가 채널 매출 도구를 한꺼번에 3번 부르면
+                  <strong>26.8초</strong>로 30초 제한에 근접(한 건 7.6초)
+                </li>
+                <li>
+                  MCP와 AI 채팅이 같은 서버라, MCP 호출이 몰리면
+                  <strong>AI 채팅 요청이 최대 1.3초 줄을 서는</strong> 문제
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  실제 업무형 질문 32개를 Claude Code로 자동 실행하는
+                  <strong>실데이터 테스트</strong>(도구 호출 142건)를 만들어
+                  도구별 시간·메모리를 기록하고 병목 특정
+                </li>
+                <li>
+                  순위는 매장·일 3만 개 단위 날짜 구간으로 나눠 계산하고 합계만
+                  모아 <strong>메모리 상한을 고정</strong> &mdash; 웹과 함께 쓰는
+                  계산 함수는 그대로 둬 화면 숫자와 일치 유지
+                </li>
+                <li>
+                  채널은 브랜드 전체를 훑던 실행 계획을
+                  <strong>FORCE INDEX</strong>로 바로잡고, 통계 테이블을 한 번만
+                  읽어 창 함수로 합계·비중 계산
+                </li>
+                <li>
+                  MCP 전용 스레드 풀·DB 연결 풀을 따로 둬
+                  <strong>AI 채팅과 자원을 격리</strong>하고, 고치기 전후 결과를
+                  <strong>바이트 단위로 대조</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  6개월 순위 조회 메모리
+                  <strong><span class="metric">+539MB → +55MB</span></strong>(약
+                  90% 감소)
+                </li>
+                <li>
+                  채널 도구 <strong>7.6초 → 2.1초</strong>, 동시 3건 26.8초 →
+                  5.2초(약 80% 단축)
+                </li>
+                <li>
+                  부하 재현에서 AI 채팅 대기 1.27초 → 0초, 수정 전후 도구 결과
+                  55가지가 <strong>바이트 단위로 동일</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 프랜디 매장 지도 분석 -->
+        <article class="project-block">
+          <h3>
+            <a
+              href="https://main.frand.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              >프랜디(Fran:D) 매장 지도 분석 &mdash; 지도 기반 매장·상권 분석</a
+            >
+          </h3>
+          <dl class="project-meta">
+            <dt>설명</dt>
+            <dd>
+              프랜차이즈 본사가 자기 브랜드 전 매장을 네이버 지도 위에서 시도 →
+              시군구 → 행정동 → 매장 순으로 내려가며 살피고, 매장 매출·메뉴를
+              브랜드·지역 평균과 비교하는 분석 화면입니다. 주변
+              상권(공공데이터)·배달 주문 분포·매장 비교·AI 보고서를 제공하며,
+              웹 화면과 서버 API 30개를 단독 개발했습니다.
+            </dd>
+            <dt>진행 기간</dt>
+            <dd>2026.10 &ndash; 2026.12</dd>
+            <dt>기술 스택</dt>
+            <dd>
+              <span class="tech-stack">
+                <code>React</code><code>Next.js</code><code>TypeScript</code
+                ><code>Naver Maps</code><code>Canvas</code><code>Web Worker</code
+                ><code>FastAPI</code><code>MySQL</code>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >저사양 PC 측정 도구로 병목을 찾아 렌더링 구조를 다시 짜고, 첫
+                진입 멈춤을 절반 이하로 줄인 지도 최적화</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  한 브랜드 매장 최대 약 2,900곳과
+                  <strong>전국 행정동 경계 3,559개(꼭짓점 27.8만 개·6MB)</strong
+                  >를 한 지도에 그려야 하는데, 네이버 지도 기본 Data 레이어는
+                  행정동을 넣을 때 367ms·줌마다 185ms 멈춤
+                </li>
+                <li>
+                  주 사용자인 본사 직원의 오래된 PC를 가정해
+                  <strong>CPU를 4배 느리게</strong> 재 보니 첫 진입이 219ms 멈춰
+                  기준(200ms)을 넘고, 6배에서는 332ms까지 멈춤
+                </li>
+                <li>
+                  끌기를 마치면 화면 밖 핀 200여 개를 한꺼번에 떼느라 231ms, 매장
+                  단계로 도시까지 끌면 쌓인 핀(487개) 때문에
+                  <strong>축소할 때 389ms 멈춤</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  Playwright·Chrome DevTools 프로토콜로
+                  <strong
+                    >CPU 1·4·6배 × GPU × 해상도 18개 조건 자동 측정 도구</strong
+                  >를 직접 만들어 긴 작업·입력 반응·fps를 재고, trace를
+                  소스맵으로 되돌려 병목 코드 줄까지 특정
+                </li>
+                <li>
+                  개수에 따라 레이어를 나눠
+                  <strong
+                    >수천 개 핀은 HTML 마커, 수만 점·경계 구획은 캔버스
+                    1장</strong
+                  >에 그리고, 화면 1px 안 꼭짓점 생략·좌표 변환 재사용으로 그리기
+                  비용 축소
+                </li>
+                <li>
+                  경계 파일 생성 도구를 직접 만들어 이웃 동이 함께 쓰는 선
+                  단위로 단순화하고, 6MB 경계 해석·색인은
+                  <strong>웹 워커</strong>로 옮겨 Float64Array로 복사 없이 넘김
+                </li>
+                <li>
+                  화면 밖 마커는 <strong>프레임마다 8ms씩 나눠 떼고</strong>,
+                  같은 줌 끌기는 표시 단계를 유지하되 화면 안 매장이 50곳을
+                  넘으면 단계를 다시 정해 핀 쌓임 차단
+                </li>
+                <li>
+                  서버는 매장 지도 응답만 gzip으로 압축하고(2천 매장 목록 578KB →
+                  146KB), 무거운 6개월 조회는
+                  <strong>읽기 작업 2개 병렬·Redis 캐시 리스·미리 계산</strong
+                  >으로 나눠 처리
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  CPU 4배 환경에서 <strong>모든 동작이 기준 200ms 안</strong
+                  >으로 들어오고, 첫 진입 멈춤
+                  <strong><span class="metric">219ms → 101ms</span></strong>(약
+                  54% 감소)
+                </li>
+                <li>
+                  끌기·축소 멈춤 231·389ms → 50ms 미만(<strong
+                    >끌기 60fps 유지</strong
+                  >), 기간 바꾸기 멈춤 70~82ms → 0ms
+                </li>
+                <li>
+                  6개월 매장 상세 첫 조회 <strong>19.5초 → 10.4초</strong>,
+                  브랜드 평균 캐시로 같은 매장 다시 열기 4.21초 → 0.44초
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="topic">
+            <p class="topic-title">
+              <mark
+                >디자인 확정 전에 기능을 먼저 완성하고, 역할 토큰·3층 구조로 새
+                시안을 빠르게 입힌 디자인 적용</mark
+              >
+            </p>
+            <div class="psr">
+              <h5>문제점</h5>
+              <ul>
+                <li>
+                  최종 디자인(12월)보다 개발 마감(11월)이 빨라
+                  <strong
+                    >시안 없이 기능을 먼저 만들고 나중에 디자인을 입혀야</strong
+                  >
+                  하는 일정
+                </li>
+                <li>
+                  새 시안은 기존 사이드바 화면이 아닌
+                  <strong>전체 화면·왼쪽 메뉴 띠·2단 패널</strong>로 화면 틀
+                  자체가 바뀌고, 지역 분포 표현도 구획 색칠에서 원형 분포도로 바뀜
+                </li>
+                <li>
+                  기존 웹은 브랜드 색을 직접 참조해 바꿀 곳이
+                  <strong>SCSS 108곳·지도 TS 9곳</strong>에 흩어져 있고, 아이콘은
+                  같은 모양 34개가 색·크기별 파일 84개로 나뉘어 있음
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>해결 과정</h5>
+              <ul>
+                <li>
+                  기능을
+                  <strong>계산(lib) → 상태(스토어·훅) → 화면(UI) 3층</strong>으로
+                  나눠 디자인이 바뀌어도 화면 층만 고치게 하고, 색·모서리·그림자
+                  가정값은 한 곳에 모음
+                </li>
+                <li>
+                  피그마 변수를 읽어 시안 팔레트 28색이 기존 토큰과 같음을 확인한
+                  뒤, 브랜드 색 직접 참조 117곳을
+                  <strong>역할(semantic) 토큰 22개</strong>로 바꾸고 컴파일 CSS
+                  전후 비교로 색 차이 0 확인, 재유입은 테스트로 차단
+                </li>
+                <li>
+                  아이콘을 CSS mask 기반 공용 <code>MaskIcon</code>으로 통일해
+                  SVG 하나가 토큰 색을 따르게 하고, 흩어진 화면 틀 조건을 경로
+                  설정(<code>routes.ts</code>)으로 모아 같은 주소에서 전체 화면으로
+                  전환
+                </li>
+                <li>
+                  최종 시안에 맞춰 지역 분포를
+                  <strong>원형 분포도(원 크기 5단계·상위 % 범례)</strong>로 바꾸고,
+                  태블릿 현장 미팅용으로 1초 누르기 메뉴를 넣고 마우스 올림 정보는
+                  탭으로도 보이게 함
+                </li>
+              </ul>
+            </div>
+            <div class="psr">
+              <h5>결과</h5>
+              <ul>
+                <li>
+                  기획 요구 약 630개를 코드와 전수 대조해 빠진 기능까지 채우고,
+                  <strong>디자인을 기다리지 않고 개발 마감 전에 QA까지</strong>
+                  올림
+                </li>
+                <li>
+                  시안 반영 8단계 중 화면 틀·패널을 바꾸는 1~7단계(<span
+                    class="metric"
+                    >171개 파일</span
+                  >)를 <strong>이틀 만에</strong> 반영
+                </li>
+                <li>
+                  강조색·스타일 가이드 확정분은
+                  <strong>토큰 값만 바꿔 화면 코드 수정 없이</strong> 적용
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
         <!-- 아타(ATA) -->
         <article class="project-block">
           <h3>
@@ -1449,6 +1842,9 @@
         <div class="project-list-group">
           <h3>웹 및 인앱 웹뷰 개발</h3>
           <ul class="compact-list">
+            <li>
+              프랜디 매장 지도 분석 (React) <span class="year">— 2026</span>
+            </li>
             <li>모두의 창업 (React) <span class="year">— 2026</span></li>
             <li>
               FilterRag 콘텐츠 필터 SaaS 관리자 콘솔 (React)
@@ -1536,6 +1932,14 @@
           <ul class="compact-list">
             <li>
               프랜디 AI 데이터 분석 에이전트 (Python / FastAPI)
+              <span class="year">— 2026</span>
+            </li>
+            <li>
+              프랜디 MCP·OAuth 인증 서버 (Python / FastAPI)
+              <span class="year">— 2026</span>
+            </li>
+            <li>
+              프랜디 매장 지도 분석 API (Python / FastAPI)
               <span class="year">— 2026</span>
             </li>
             <li>
